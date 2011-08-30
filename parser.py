@@ -10,12 +10,15 @@
 
 from sgmllib import SGMLParser
 import urllib
-import sys
+import sys, os
 
 
 DOW_SITES = [
+	#sitios de descarga a filtrar
     'megaupload.com',
     'rapidshared.com',
+    #'fileserver.com',
+    'fileserve.com',
 ]
 
 
@@ -65,12 +68,14 @@ def main():
         ----------------------------------------
 
     """
-    url = 'http://www.taringa.net/posts/juegos/1123319/Lineage-2-Kamael-Megaupload-40-partes.html'
-    if len(sys.argv != 2):
+    url = 'http://www.mcanime.net/foro/viewtopic.php?p=7461959'
+    if len(sys.argv) != 2:
         print "argumentos invalidos\nusar encap www.pagina_a_buscar.com"
-        sys.exit(-1)
-
-    #url = sys.argv[1]
+        print "parseando url por defecto %s" %url
+        #sys.exit(-1)
+    else:
+		url = sys.argv[1]
+		
     sock = urllib.urlopen(url)
     data = sock.read()
     sock.close()
@@ -84,7 +89,8 @@ def main():
         f.write('%s\n' %url)
     f.close
 
-    print 'analisis completado..'
+    print 'analisis completado.. abriendo notepad'
+    os.system("NOTEPAD urls.txt")
 
 if __name__ == '__main__':
     main()
